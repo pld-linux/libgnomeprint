@@ -10,6 +10,7 @@
 %define freetype_version 2.0.3
 
 Summary:	Printing library for GNOME
+Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	1.110.0
 Release:	1
@@ -26,21 +27,18 @@ Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{vers
 # Bug fix patches
 # remove libexec breakage
 #Patch3:	%{name}-1.105.0.90-libexec.patch
-PreReq:		urw-fonts
-PreReq:		ghostscript
-PreReq:		ghostscript-fonts
+URL:		http://www.gnome.org/
+PreReq:		ghostscript-fonts-std
 PreReq:		libxml
 PreReq:		perl
 PreReq:		XFree86
-PreReq:		libgnomeprint = %{PACKAGE_VERSION}
-
-BuildPrereq:	glib2-devel >= %{glib2_version}
-BuildPrereq:	libxml2-devel >= %{libxml2_version}
-BuildPrereq:	libart_lgpl-devel >= %{libart_lgpl_version}
-BuildPrereq:	libbonobo-devel >= %{libbonobo_version}
-BuildPrereq:	freetype >= %{freetype_version}
-BuildPrereq:	automake14
-URL:		http://www.gnome.org/
+PreReq:		/sbin/ldconfig
+BuildRequires:	glib2-devel >= %{glib2_version}
+BuildRequires:	libxml2-devel >= %{libxml2_version}
+BuildRequires:	libart_lgpl-devel >= %{libart_lgpl_version}
+BuildRequires:	libbonobo-devel >= %{libbonobo_version}
+BuildRequires:	freetype >= %{freetype_version}
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -54,8 +52,15 @@ the GNOME applications that can print. If you would like to develop
 GNOME applications that can print you will also need to install the
 gnome-print devel package.
 
+%description
+GNOME (GNU Network Object Model Environment) jest zestawem przyjaznych
+dla uøytkownika aplikacji i narzÍdzi do uøytku w po≥±czeniu z zarz±dc±
+okien X Window System. Pakiet libgnomeprint zawiera biblioteki
+niezbÍdne aplikacjom GNOME do drukowania.
+
 %package devel
-Summary:	Libraries and include files for developing GNOME applications
+Summary:	Include files for libgnomeprint
+Summary(pl):	Pliki nag≥Ûwkowe libgnomeprint
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -64,10 +69,7 @@ Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
 Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
-
-Requires:	%{name} = %{PACKAGE_VERSION}
-Requires:	libgnomeprint = %{PACKAGE_VERSION}
-
+Requires:	%{name} = %{version}
 Requires:	glib2-devel >= %{glib2_version}
 Requires:	libxml2-devel >= %{libxml2_version}
 Requires:	libart_lgpl-devel >= %{libart_lgpl_version}
@@ -85,6 +87,29 @@ You should install the gnome-print-devel package if you would like to
 develop GNOME applications that will use the GNOME print capabilities.
 You do not need to install the gnome-print-devel package if you just
 want to use the GNOME desktop environment.
+
+%description devel -l pl
+Pliki nag≥Ûwkowe niezbÍdne do kompilacji aplikacji uøywaj±cych
+biblioteki drukowania GNOME.
+
+%package static
+Summary:	Static libgnomeprint library
+Summary(pl):	Statyczna biblioteka libgnomeprint
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Requires:	%{name}-devel = %{version}
+
+%description static
+Static version of libgnomeprint library.
+
+%description static -l pl
+Statyczna wersja biblioteki libgnomeprint.
 
 %prep
 %setup -q
@@ -106,6 +131,8 @@ install $RPM_BUILD_ROOT%{_sysconfdir}/gnome/fonts
 	DESTDIR=$RPM_BUILD_ROOT \
 	FONTMAPDIR_STATIC=$RPM_BUILD_ROOT%{_datadir}/gnome/libgnomeprint-2.0/fonts
 
+gzip -9nf AUTHORS ChangeLog NEWS README installer/README.*
+
 %find_lang %{name}
 
 %clean
@@ -119,16 +146,14 @@ libgnomeprint-2.0-font-install                                          \
        --aliases=%{_datadir}/gnome-print/fonts/adobe-urw.font           \
        --target=%{_sysconfdir}/gnome/fonts/libgnomeprint-rpm.fontmap    \
        --recursive --static                                            \
-       %{_datadir}/fonts/default/Type1                                  \
-       /usr/X11R6/lib/X11/fonts/Type1
-
+       %{_fontsdir}/Type1
 /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README installer/README.*
+%doc AUTHORS.gz ChangeLog.gz NEWS.gz README.gz installer/README.*.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_libdir}/gnome-print-2.0
@@ -140,5 +165,8 @@ libgnomeprint-2.0-font-install                                          \
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
-%{_libdir}/*.a
 %{_includedir}/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
