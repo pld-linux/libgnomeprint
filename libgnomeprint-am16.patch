@@ -1,0 +1,30 @@
+--- libgnomeprint-1.113.0/libgnomeprint/drivers/Makefile.am.wiget	Fri May 24 14:04:06 2002
++++ libgnomeprint-1.113.0/libgnomeprint/drivers/Makefile.am	Fri May 24 14:05:30 2002
+@@ -11,7 +11,7 @@
+ libgnomeprint_fax_la_LDFLAGS =  -version-info 0:0:0 -module
+ libgnomeprint_fax_la_LIBADD =
+ 
+-libexecdir = $(libdir)/gnome-print-2.0/drivers
++driversdir = $(libdir)/gnome-print-2.0/drivers
+ 
+ if HAVE_OMNI
+ omni_libraries = $(OMNI2_LIB)
+@@ -23,7 +23,7 @@
+ omni_libadd =
+ endif
+ 
+-libexec_LTLIBRARIES = \
++drivers_LTLIBRARIES = \
+ 	$(FAX_LIB) \
+ 	$(omni_libraries)
+ noinst_LTLIBRARIES =
+--- libgnomeprint-1.113.0/libgnomeprint/transports/Makefile.am.wiget	Fri May 24 14:06:16 2002
++++ libgnomeprint-1.113.0/libgnomeprint/transports/Makefile.am	Fri May 24 14:07:26 2002
+@@ -1,5 +1,5 @@
+-libexecdir = $(libdir)/gnome-print-2.0/transports
+-libexec_LTLIBRARIES = \
++transportsdir = $(libdir)/gnome-print-2.0/transports
++transports_LTLIBRARIES = \
+ 	$(FILE_LIB) \
+ 	$(LPR_LIB)
+ 
