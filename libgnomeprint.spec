@@ -4,7 +4,7 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.1.7
+Version:	2.1.8
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -22,7 +22,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.0
 BuildRequires:	pango-devel >= 1.2.0
 BuildRequires:	rpm-build >= 4.1-10
-Requires:	bonobo-activation >= 2.1.0
+Requires:	bonobo-activation >= 2.1.1
 PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
