@@ -98,6 +98,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/fonts
 # instead of %%makeinstall with this hack.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	pkgconfigdir=%{_pkgconfigdir} \
 	FONTMAPDIR_STATIC=%{_datadir}/gnome/libgnomeprint-2.0/fonts
 
 gzip -9nf AUTHORS ChangeLog NEWS README installer/README.*
@@ -125,8 +126,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz */*.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_libdir}/gnome-print-*
-%{_libdir}/pkgconfig/*
+%dir %{_libdir}/gnome-print-*
+%dir %{_libdir}/gnome-print-*/*
+%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.so
+%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.la
 %{_datadir}/gnome-print-*
 %{_datadir}/gnome/libgnomeprint-*
 
@@ -135,7 +138,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+%{_libdir}/gnome-print-*/*/*.a
