@@ -7,7 +7,7 @@ Version:	1.116.1
 Release:	2
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.116/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/1.116/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-am16.patch
 URL:		http://www.gnome.org/
@@ -21,6 +21,8 @@ BuildRequires:	libbonobo-devel >= 2.0.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.22
 BuildRequires:	pango-devel >= 1.0.0
+BuildConflicts:	bonobo-activation-devel >= 2.1.0
+Conflicts:	bonobo-activation >= 2.1.0
 PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
