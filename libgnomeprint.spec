@@ -13,7 +13,7 @@ BuildRequires:	automake >= 1.7.2
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 1:2.4.4
-BuildRequires:	gnome-common >= 2.4.0
+BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libgnomecups-devel >= 0.1.11
@@ -100,7 +100,7 @@ Modu³ CUPS dla libgnomeprint.
 
 %build
 %{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure \
