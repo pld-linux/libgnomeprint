@@ -1,26 +1,26 @@
-# TODO:
-# - add support to IBM OMNI drivers
-# - cups subpackage with cups modules
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.4.2
-Release:	2
+Version:	2.6.0
+Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	d58534de6c0c6c953b42d82eec0ebfe8
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	f2010f398d12e9c589a8a7d05ef37d39
+Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-BuildRequires:	cups-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 2.2.0
+BuildRequires:	glib2-devel >= 1:2.4.0
+BuildRequires:	gnome-common >= 2.4.0
+BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
-BuildRequires:	libbonobo-devel >= 2.4.0
-#BuildRequires:	libtool
+BuildRequires:	libbonobo-devel >= 2.6.0
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1.2.0
+BuildRequires:	pango-devel >= 1.4.0
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,11 +47,11 @@ Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 2.2.0
+Requires:	glib2-devel >= 1:2.4.0
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
-Requires:	libbonobo-devel >= 2.4.0
-Requires:	libxml2-devel >= 2.4.7
+Requires:	libbonobo-devel >= 2.6.0
+Requires:	libxml2-devel >= 2.5.7
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -81,19 +81,35 @@ Static version of libgnomeprint library.
 %description static -l pl
 Statyczna wersja biblioteki libgnomeprint.
 
+%package cups
+Summary:	CUPS module for libgnomeprint
+Summary(pl):	Modu³ CUPS dla libgnomeprint
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description cups
+CUPS module for libgnomeprint.
+
+%description static -l pl
+Modu³ CUPS dla libgnomeprint.
+
 %prep
 %setup -q
+%patch0 -p1
+
+mv po/{no,nb}.po
 
 %build
-#%%{__libtoolize}
-#%%{__aclocal}
-#%%{__autoconf}
-#%%{__automake}
-cp -f /usr/share/automake/config.sub .
+%{__libtoolize}
+%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__autoconf}
+%{__automake}
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
-	--enable-gtk-doc
+	--enable-gtk-doc \
+	--with-cups
+
 %{__make}
 
 %install
@@ -124,9 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/modules
 %dir %{_libdir}/%{name}/*/modules/transports
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
-%{_libdir}/%{name}/*/modules/*.la
 %{_libdir}/%{name}/*/modules/transports/*.la
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
@@ -144,3 +158,8 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+
+%files cups
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintcups.so
+%{_libdir}/%{name}/*/modules/libgnomeprintcups.la
