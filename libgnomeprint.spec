@@ -8,16 +8,16 @@ Group:		Libraries
 Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
 URL:		http://www.gnome.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	bonobo-activation-devel
+BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.1
-BuildRequires:	libxml2-devel >= 2.4.7
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 1.110
-BuildRequires:	freetype-devel
-BuildRequires:	pango-devel >= 1.0.0
-BuildRequires:	automake
-BuildRequires:	autoconf
 BuildRequires:	libtool
+BuildRequires:	libxml2-devel >= 2.4.7
+BuildRequires:	pango-devel >= 1.0.0
 PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
