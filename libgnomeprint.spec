@@ -11,7 +11,7 @@ Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	cups-devel >= 1.1.20
+BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 2.3.0
 BuildRequires:	gnome-common >= 2.4.0
