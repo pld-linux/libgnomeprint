@@ -2,12 +2,13 @@ Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.6.1
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
 # Source0-md5:	76e8d5c410eb04ab4493a2f32cf375ac
 Patch0:		%{name}-locale-names.patch
+Patch1:		%{name}-libext.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -96,6 +97,7 @@ Modu³ CUPS dla libgnomeprint.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 mv po/{no,nb}.po
 
