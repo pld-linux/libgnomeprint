@@ -3,8 +3,8 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.1.1
-Release:	2
+Version:	2.1.2
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.1/%{name}-%{version}.tar.bz2
@@ -105,7 +105,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 	pkgconfigdir=%{_pkgconfigdir} \
 	HTML_DIR=%{_gtkdocdir}
 
-%find_lang %{name}-2.0
+%find_lang %{name}-2.2
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -122,10 +122,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -p /sbin/ldconfig
 
-%files -f %{name}-2.0.lang
+%files -f %{name}-2.2.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README installer/README.*
-%attr(755,root,root) %{_bindir}/*
+%doc AUTHORS ChangeLog NEWS README
+#%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/*
@@ -134,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.so*
 %{_libdir}/%{name}/*/*/*/*.la
 %{_datadir}/gnome-print-*
-%{_datadir}/gnome/libgnomeprint-*
+#%{_datadir}/gnome/libgnomeprint-*
 %{_sysconfdir}/gnome/libgnomeprint-*
 
 %files devel
