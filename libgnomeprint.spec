@@ -1,14 +1,13 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.6.2
+Version:	2.7.0
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	f742bb321fab833b67270f7b86af0fdb
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.7/%{name}-%{version}.tar.bz2
+# Source0-md5:	4f81a870ef3ce4ad785826378e344711
 Patch0:		%{name}-locale-names.patch
-Patch1:		%{name}-libext.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -20,10 +19,12 @@ BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1.4.0
+BuildRequires:	pango-devel >= 1.5.0
 BuildRequires:	pkgconfig
+BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
+Requires:	pango >= 1.5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -96,7 +97,6 @@ Modu³ CUPS dla libgnomeprint.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 mv po/{no,nb}.po
 
