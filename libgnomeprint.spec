@@ -1,29 +1,30 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.6.2
+Version:	2.8.0
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	f742bb321fab833b67270f7b86af0fdb
-Patch0:		%{name}-locale-names.patch
-Patch1:		%{name}-libext.patch
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.8/%{name}-%{version}.tar.bz2
+# Source0-md5:	b63b332443508b1f71b3061d58404590
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
+BuildRequires:	automake >= 1.7.2
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 1:2.4.2
+BuildRequires:	glib2-devel >= 1:2.4.4
 BuildRequires:	gnome-common >= 2.4.0
 BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
+BuildRequires:	libgnomecups-devel >= 0.1.11
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1:1.4.0
+BuildRequires:	pango-devel >= 1:1.5.2
 BuildRequires:	pkgconfig
+BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
+Requires:	pango >= 1:1.5.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,10 +49,11 @@ Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.4.2
+Requires:	glib2-devel >= 1:2.4.4
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
 Requires:	libxml2-devel >= 2.5.7
+Requires:	pango-devel >= 1:1.5.2
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -95,10 +97,6 @@ Modu³ CUPS dla libgnomeprint.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-
-mv po/{no,nb}.po
 
 %build
 %{__libtoolize}
@@ -125,6 +123,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 # no static modules - shut up check-files
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*/modules/{*.a,transports/*.a}
 
+rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
+
 %find_lang %{name}-2.2
 
 %clean
@@ -141,8 +141,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/modules
 %dir %{_libdir}/%{name}/*/modules/transports
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintlpd.so
 %attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
 %{_libdir}/%{name}/*/modules/transports/*.la
+%{_libdir}/%{name}/*/modules/libgnomeprintlpd.la
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
 %dir %{_sysconfdir}/gnome
