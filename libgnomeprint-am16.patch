@@ -28,3 +28,17 @@
  	$(FILE_LIB) \
  	$(LPR_LIB)
  
+--- libgnomeprint-1.115.0/tests/Makefile.am.wiget	Mon Jun 10 21:31:14 2002
++++ libgnomeprint-1.115.0/tests/Makefile.am	Mon Jun 10 21:35:05 2002
+@@ -1,8 +1,9 @@
+ if USING_GCC
+-CFLAGS=$(WARN_CFLAGS) -Werror
++WCFLAGS=$(WARN_CFLAGS) -Werror
+ else
+-CFLAGS=$(WARN_CFLAGS)
++WCFLAGS=$(WARN_CFLAGS)
+ endif
++CFLAGS=$(WCFLAGS)
+ 
+ noinst_PROGRAMS = generate
+ ## testchema
