@@ -89,6 +89,7 @@ Statyczna wersja biblioteki libgnomeprint.
 #%%{__aclocal}
 #%%{__autoconf}
 #%%{__automake}
+cp -f /usr/share/automake/config.sub .
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
