@@ -1,38 +1,27 @@
-## this could go, it's really just so we notice if the soname changes
-%define sover 0
-
-%define glib2_base_version 1.3.13
-#%define glib2_version %{glib2_base_version}.90
-%define glib2_version %{glib2_base_version}
-%define libxml2_version 2.4.12
-%define libart_lgpl_version 2.3.8
-%define libbonobo_version 1.110.0
-%define freetype_version 2.0.3
-
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	1.110.0
+Version:	1.112.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
-# Bug fix patches
-# remove libexec breakage
-#Patch3:	%{name}-1.105.0.90-libexec.patch
 URL:		http://www.gnome.org/
 PreReq:		ghostscript-fonts-std
-PreReq:		libxml
-PreReq:		perl
-PreReq:		XFree86
-PreReq:		/sbin/ldconfig
-BuildRequires:	glib2-devel >= %{glib2_version}
-BuildRequires:	libxml2-devel >= %{libxml2_version}
-BuildRequires:	libart_lgpl-devel >= %{libart_lgpl_version}
-BuildRequires:	libbonobo-devel >= %{libbonobo_version}
-BuildRequires:	freetype >= %{freetype_version}
+BuildRequires:	glib2-devel >= 2.0.1
+BuildRequires:	libxml2-devel >= 2.4.7
+BuildRequires:	libart_lgpl-devel
+BuildRequires:	libbonobo-devel >= 1.110
+BuildRequires:	freetype-devel
+BuildRequires:	pango-devel >= 1.0.0
 BuildRequires:	automake
+BuildRequires:	autoconf
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define         _prefix         /usr/X11R6
+%define         _mandir         %{_prefix}/man
+%define         _sysconfdir     /etc/X11/GNOME2
 
 %description
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -56,11 +45,10 @@ Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
-Requires:	glib2-devel >= %{glib2_version}
-Requires:	libxml2-devel >= %{libxml2_version}
-Requires:	libart_lgpl-devel >= %{libart_lgpl_version}
-Requires:	libbonobo-devel >= %{libbonobo_version}
-Requires:	freetype >= %{freetype_version}
+Requires:	glib2-devel >= 2.0.1
+Requires:	libxml2-devel >= 2.4.7
+Requires:	libart_lgpl-devel
+Requires:	libbonobo-devel
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -92,9 +80,11 @@ Statyczna wersja biblioteki libgnomeprint.
 
 %prep
 %setup -q
-#%patch3 -p1 -b .libexec
 
 %build
+libtoolize --copy --force
+aclocal
+autoconf
 automake -a -c -f
 %configure \
 	--disable-font-install
@@ -102,17 +92,17 @@ automake -a -c -f
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install $RPM_BUILD_ROOT%{_sysconfdir}/gnome/fonts
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/fonts
 
 # It would probably be cleaner to use install DESTDIR=$RPM_BUILD_ROOT
 # instead of %%makeinstall with this hack.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	FONTMAPDIR_STATIC=$RPM_BUILD_ROOT%{_datadir}/gnome/libgnomeprint-2.0/fonts
+	FONTMAPDIR_STATIC=%{_datadir}/gnome/libgnomeprint-2.0/fonts
 
 gzip -9nf AUTHORS ChangeLog NEWS README installer/README.*
 
-%find_lang %{name}
+%find_lang %{name}-2.0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -121,24 +111,24 @@ rm -rf $RPM_BUILD_ROOT
 ## we could pass --dynamic here to install to /etc instead
 ## but I think it makes more sense to have this not be a config
 ## file, then people make their changes in /etc if they want
-libgnomeprint-2.0-font-install                                          \
-       --aliases=%{_datadir}/gnome-print/fonts/adobe-urw.font           \
-       --target=%{_sysconfdir}/gnome/fonts/libgnomeprint-rpm.fontmap    \
-       --recursive --static                                            \
-       %{_fontsdir}/Type1
+%{_bindir}/libgnomeprint-2.0-font-install \
+       --aliases=%{_datadir}/gnome-print/fonts/adobe-urw.font \
+       --target=%{_sysconfdir}/gnome/fonts/libgnomeprint-rpm.fontmap \
+       --recursive --static \
+       %{_datadir}/fonts/Type1
 /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f %{name}-2.0.lang
 %defattr(644,root,root,755)
-%doc AUTHORS.gz ChangeLog.gz NEWS.gz README.gz installer/README.*.gz
+%doc *.gz */*.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_libdir}/gnome-print-2.0
+%{_libdir}/gnome-print-*
 %{_libdir}/pkgconfig/*
-%{_datadir}/gnome-print-2.0
-%{_datadir}/gnome/libgnomeprint-2.0
+%{_datadir}/gnome-print-*
+%{_datadir}/gnome/libgnomeprint-*
 
 %files devel
 %defattr(644,root,root,755)
