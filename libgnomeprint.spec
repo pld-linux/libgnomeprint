@@ -1,19 +1,16 @@
-# TODO:
-# - add support to IBM OMNI drivers
-# - cups subpackage with cups modules
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.5.1
+Version:	2.5.2
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	28a2b3838918f7f83135ca657ca13f73
+# Source0-md5:	b836d210b733414a425601938a70d6e2
 URL:		http://www.gnome.org/
 #BuildRequires:	autoconf
 #BuildRequires:	automake
-BuildRequires:	cups-devel
+BuildRequires:	cups-devel >= 1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 2.3.0
 BuildRequires:	libart_lgpl-devel >= 2.3.14
@@ -81,6 +78,18 @@ Static version of libgnomeprint library.
 %description static -l pl
 Statyczna wersja biblioteki libgnomeprint.
 
+%package cups
+Summary:	CUPS module for libgnomeprint
+Summary(pl):	Modu³ CUPS dla libgnomeprint
+Group:		Libraries
+Requires:	%{name} = %{version}
+
+%description cups
+CUPS module for libgnomeprint.
+
+%description static -l pl
+Modu³ CUPS dla libgnomeprint.
+
 %prep
 %setup -q
 
@@ -92,7 +101,9 @@ Statyczna wersja biblioteki libgnomeprint.
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
-	--enable-gtk-doc
+	--enable-gtk-doc \
+	--with-cups
+
 %{__make}
 
 %install
@@ -123,9 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/modules
 %dir %{_libdir}/%{name}/*/modules/transports
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
-%{_libdir}/%{name}/*/modules/*.la
 %{_libdir}/%{name}/*/modules/transports/*.la
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
@@ -143,3 +152,8 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+
+%files cups
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintcups.so
+%{_libdir}/%{name}/*/modules/libgnomeprintcups.la
