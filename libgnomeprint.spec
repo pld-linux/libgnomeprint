@@ -20,7 +20,7 @@ BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1.4.0
+BuildRequires:	pango-devel >= 1:1.4.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
