@@ -1,30 +1,31 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.7.0
+Version:	2.7.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	4f81a870ef3ce4ad785826378e344711
+# Source0-md5:	60a6e33da00e5b212b1a05a92e131359
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 1:2.4.2
+BuildRequires:	glib2-devel >= 1:2.4.4
 BuildRequires:	gnome-common >= 2.4.0
 BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
+BuildRequires:	libgnomecups-devel >= 0.1.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1.5.0
+BuildRequires:	pango-devel >= 1.5.1
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1.5.0
+Requires:	pango >= 1.5.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,10 +50,11 @@ Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.4.2
+Requires:	glib2-devel >= 1:2.4.4
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
 Requires:	libxml2-devel >= 2.5.7
+Requires:	pango-devel >= 1.5.1
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -141,8 +143,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/modules
 %dir %{_libdir}/%{name}/*/modules/transports
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintlpd.so
 %attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
 %{_libdir}/%{name}/*/modules/transports/*.la
+%{_libdir}/%{name}/*/modules/libgnomeprintlpd.la
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
 %dir %{_sysconfdir}/gnome
