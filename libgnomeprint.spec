@@ -134,9 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/*
 %attr(755,root,root) %{_libdir}/%{name}/*/*/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/*/*/*.la
+%{_libdir}/%{name}/*/*/*.la
 %attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.la
+%{_libdir}/%{name}/*/*/*/*.la
 %{_datadir}/gnome-print-*
 %{_datadir}/gnome/libgnomeprint-*
 %{_sysconfdir}/gnome/libgnomeprint-*
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
 %{_gtkdocdir}/*
