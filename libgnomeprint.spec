@@ -12,6 +12,7 @@ URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bonobo-activation-devel >= 2.1.0
+BuildRequires:	cups-devel
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.1.3
 BuildRequires:	libart_lgpl-devel >= 2.3.7
