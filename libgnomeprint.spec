@@ -20,12 +20,12 @@ BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libgnomecups-devel >= 0.1.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1.5.1
+BuildRequires:	pango-devel >= 1:1.5.1
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1.5.1
+Requires:	pango >= 1:1.5.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,7 +54,7 @@ Requires:	glib2-devel >= 1:2.4.4
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
 Requires:	libxml2-devel >= 2.5.7
-Requires:	pango-devel >= 1.5.1
+Requires:	pango-devel >= 1:1.5.1
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
