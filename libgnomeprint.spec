@@ -1,5 +1,6 @@
 # TODO:
-# add support to IBM OMNI drivers
+# - add support to IBM OMNI drivers
+# - cups subpackage with cups modules
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
