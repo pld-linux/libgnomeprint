@@ -86,10 +86,10 @@ Statyczna wersja biblioteki libgnomeprint.
 %setup -q
 
 %build
-#%{__libtoolize}
-#%{__aclocal}
-#%{__autoconf}
-#%{__automake}
+#%%{__libtoolize}
+#%%{__aclocal}
+#%%{__autoconf}
+#%%{__automake}
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
