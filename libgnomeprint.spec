@@ -9,7 +9,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.8/%{name}-%{version}.t
 # Source0-md5:	8361c4e1bc3d87b91435807d0c06a3e4
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake >= 1.7.2
+BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 1:2.4.4
