@@ -1,30 +1,30 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.8.2
+Version:	2.10.0
 Release:	1
-License:	LGPL
+License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	8361c4e1bc3d87b91435807d0c06a3e4
+Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.10/%{name}-%{version}.tar.bz2
+# Source0-md5:	a8cd7e55c5ee9da019b2257eff83ce35
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 1:2.4.4
+BuildRequires:	glib2-devel >= 1:2.6.3
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
-BuildRequires:	libgnomecups-devel >= 0.1.13
+BuildRequires:	libgnomecups-devel >= 0.2.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.5.7
-BuildRequires:	pango-devel >= 1:1.5.2
+BuildRequires:	libxml2-devel >= 2.6.17
+BuildRequires:	pango-devel >= 1:1.8.0
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1:1.5.2
+Requires:	pango >= 1:1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -108,7 +108,6 @@ Modu³ CUPS dla libgnomeprint.
 	--with-html-dir=%{_gtkdocdir} \
 	--enable-gtk-doc \
 	--with-cups
-
 %{__make}
 
 %install
