@@ -4,7 +4,7 @@ Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	1.116.1
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.116/%{name}-%{version}.tar.bz2
@@ -13,7 +13,7 @@ Patch1:		%{name}-am16.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-activation-devel >= 1.0.0
+BuildRequires:	bonobo-activation-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.3
 BuildRequires:	libart_lgpl-devel >= 2.3.7
@@ -21,6 +21,7 @@ BuildRequires:	libbonobo-devel >= 2.0.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.22
 BuildRequires:	pango-devel >= 1.0.0
+Requires:	bonobo-activation >= 2.1.0
 PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
