@@ -46,11 +46,11 @@ niezbêdne aplikacjom GNOME do drukowania.
 Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
-Requires:	glib2-devel >= 2.0.1
+Requires:	%{name} = %{version}-%{release}
+Requires:	glib2-devel >= 2.2.0
 Requires:	gtk-doc-common
-Requires:	libart_lgpl-devel
-Requires:	libbonobo-devel >= 1.110
+Requires:	libart_lgpl-devel >= 2.3.14
+Requires:	libbonobo-devel >= 2.4.0
 Requires:	libxml2-devel >= 2.4.7
 
 %description devel
@@ -73,7 +73,7 @@ biblioteki drukowania GNOME.
 Summary:	Static libgnomeprint library
 Summary(pl):	Statyczna biblioteka libgnomeprint
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of libgnomeprint library.
