@@ -5,8 +5,8 @@ diff -urN libgnomeprint-2.6.0.orig/configure.in libgnomeprint-2.6.0/configure.in
  AC_SUBST(GETTEXT_PACKAGE)
  AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Gettext package])
  
--ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA en_GB es et fa fi fr ga he hi hr hu id is it ja ko lt lv mk ml mn mr ms nl nn no pa pl pt pt_BR ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
-+ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA en_GB es et fa fi fr ga he hi hr hu id is it ja ko lt lv mk ml mn mr ms nb nl nn pa pl pt pt_BR ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
+-ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA en_GB es et eu fa fi fr ga gu he hi hr hu id is it ja ko lt lv mk ml mn mr ms nl nn no pa pl pt pt_BR ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
++ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA en_GB es et eu fa fi fr ga gu he hi hr hu id is it ja ko lt lv mk ml mn mr ms nb nl nn pa pl pt pt_BR ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
  AM_GLIB_GNU_GETTEXT
  
  dnl ==========================================
