@@ -4,7 +4,7 @@ Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	1.115.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -27,7 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define         _prefix         /usr/X11R6
 %define         _mandir         %{_prefix}/man
 %define         _sysconfdir     /etc/X11/GNOME2
-%define		_gtkdocdir	/usr/share/doc/gtk-doc/html
+%define		_gtkdocdir	%{_defaultdocdir}/gtk-doc/html
 
 %description
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -52,6 +52,7 @@ Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	glib2-devel >= 2.0.1
+Requires:	gtk-doc-common
 Requires:	libxml2-devel >= 2.4.7
 Requires:	libart_lgpl-devel
 Requires:	libbonobo-devel >= 1.110
