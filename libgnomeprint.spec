@@ -1,13 +1,14 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	1.112.0
+Version:	1.113.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-ac_fixes.patch
 URL:		http://www.gnome.org/
-PreReq:		ghostscript-fonts-std
+BuildRequires:	bonobo-activation-devel
 BuildRequires:	glib2-devel >= 2.0.1
 BuildRequires:	libxml2-devel >= 2.4.7
 BuildRequires:	libart_lgpl-devel
@@ -17,6 +18,7 @@ BuildRequires:	pango-devel >= 1.0.0
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
+PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -48,7 +50,7 @@ Requires:	%{name} = %{version}
 Requires:	glib2-devel >= 2.0.1
 Requires:	libxml2-devel >= 2.4.7
 Requires:	libart_lgpl-devel
-Requires:	libbonobo-devel
+Requires:	libbonobo-devel >= 1.110
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -80,6 +82,7 @@ Statyczna wersja biblioteki libgnomeprint.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 libtoolize --copy --force
