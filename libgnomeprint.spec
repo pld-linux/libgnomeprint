@@ -95,7 +95,7 @@ Statyczna wersja biblioteki libgnomeprint.
 #%patch3 -p1 -b .libexec
 
 %build
-automake -a -c
+automake -a -c -f
 %configure \
 	--disable-font-install
 %{__make}
