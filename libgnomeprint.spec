@@ -87,8 +87,8 @@ Statyczna wersja biblioteki libgnomeprint.
 %build
 libtoolize --copy --force
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure \
 	--disable-font-install
 %{__make}
