@@ -2,15 +2,16 @@ Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	1.113.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
+Patch1:		%{name}-am16.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-activation-devel
+BuildRequires:	bonobo-activation-devel >= 0.9.9
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.1
 BuildRequires:	libart_lgpl-devel
@@ -83,6 +84,7 @@ Statyczna wersja biblioteki libgnomeprint.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 libtoolize --copy --force
@@ -95,16 +97,14 @@ aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/fonts
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 
 # It would probably be cleaner to use install DESTDIR=$RPM_BUILD_ROOT
 # instead of %%makeinstall with this hack.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgconfigdir=%{_pkgconfigdir} \
-	FONTMAPDIR_STATIC=%{_datadir}/gnome/libgnomeprint-2.0/fonts
+	pkgconfigdir=%{_pkgconfigdir} 
 
-gzip -9nf AUTHORS ChangeLog NEWS README installer/README.*
 
 %find_lang %{name}-2.0
 
@@ -116,25 +116,25 @@ rm -rf $RPM_BUILD_ROOT
 ## but I think it makes more sense to have this not be a config
 ## file, then people make their changes in /etc if they want
 %{_bindir}/libgnomeprint-2.0-font-install \
-       --aliases=%{_datadir}/gnome-print/fonts/adobe-urw.font \
-       --target=%{_sysconfdir}/gnome/fonts/libgnomeprint-rpm.fontmap \
+       --aliases=%{_datadir}/libgnomeprint-2.0/fonts/adobe-urw.font \
        --recursive --static \
-       %{_datadir}/fonts/Type1
+       %{_fontsdir}
 /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %files -f %{name}-2.0.lang
 %defattr(644,root,root,755)
-%doc *.gz */*.gz
+%doc AUTHORS ChangeLog NEWS README installer/README.*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_libdir}/gnome-print-*
 %dir %{_libdir}/gnome-print-*/*
-%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.so
+%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.so*
 %attr(755,root,root) %{_libdir}/gnome-print-*/*/*.la
 %{_datadir}/gnome-print-*
 %{_datadir}/gnome/libgnomeprint-*
+%{_sysconfdir}/gnome/libgnomeprint-*
 
 %files devel
 %defattr(644,root,root,755)
