@@ -1,7 +1,9 @@
+# TODO:
+# add support to IBM OMNI drivers
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	1.114.0
+Version:	1.115.0
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -11,13 +13,13 @@ Patch1:		%{name}-am16.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-activation-devel >= 0.9.9
+BuildRequires:	bonobo-activation-devel >= 1.0.0
 BuildRequires:	freetype-devel >= 2.0.0
-BuildRequires:	glib2-devel >= 2.0.1
-BuildRequires:	libart_lgpl-devel
-BuildRequires:	libbonobo-devel >= 1.110
+BuildRequires:	glib2-devel >= 2.0.3
+BuildRequires:	libart_lgpl-devel >= 2.3.7
+BuildRequires:	libbonobo-devel >= 2.0.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.4.7
+BuildRequires:	libxml2-devel >= 2.4.22
 BuildRequires:	pango-devel >= 1.0.0
 PreReq:		ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -25,6 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define         _prefix         /usr/X11R6
 %define         _mandir         %{_prefix}/man
 %define         _sysconfdir     /etc/X11/GNOME2
+%define		_gtkdocdir	/usr/share/doc/gtk-doc/html
 
 %description
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -92,7 +95,9 @@ aclocal
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-font-install
+	--disable-font-install \
+	--with-html-dir=%{_gtkdocdir} \
+	--enable-gtk-doc
 %{__make}
 
 %install
@@ -103,8 +108,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 # instead of %%makeinstall with this hack.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgconfigdir=%{_pkgconfigdir} 
-
+	pkgconfigdir=%{_pkgconfigdir} \
+	HTML_DIR=%{_gtkdocdir}
 
 %find_lang %{name}-2.0
 
@@ -142,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
+%{_gtkdocdir}/*
 
 %files static
 %defattr(644,root,root,755)
