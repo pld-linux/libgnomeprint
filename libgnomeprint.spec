@@ -10,7 +10,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.t
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-libext.patch
 URL:		http://www.gnome.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
@@ -18,10 +18,10 @@ BuildRequires:	glib2-devel >= 1:2.4.0
 BuildRequires:	gnome-common >= 2.4.0
 BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
-BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
 BuildRequires:	pango-devel >= 1.4.0
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -51,7 +51,6 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.4.0
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
-Requires:	libbonobo-devel >= 2.6.0
 Requires:	libxml2-devel >= 2.5.7
 
 %description devel
