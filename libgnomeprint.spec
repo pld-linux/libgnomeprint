@@ -5,7 +5,7 @@ Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.2.1.2
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.2/%{name}-%{version}.tar.bz2
@@ -23,7 +23,7 @@ BuildRequires:	libxml2-devel >= 2.5.0
 BuildRequires:	pango-devel >= 1.2.0
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	bonobo-activation >= 2.1.1
-PreReq:		ghostscript-fonts-std
+Requires:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -100,34 +100,37 @@ Statyczna wersja biblioteki libgnomeprint.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 
-# It would probably be cleaner to use install DESTDIR=$RPM_BUILD_ROOT
-# instead of %%makeinstall with this hack.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgconfigdir=%{_pkgconfigdir} \
 	HTML_DIR=%{_gtkdocdir}
+
+# no static modules - shut up check-files
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*/modules/{*.a,transports/*.a}
 
 %find_lang %{name}-2.2
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files -f %{name}-2.2.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%dir %{_libdir}/%{name}/
+%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/*
-%dir %{_libdir}/%{name}/*/*
-%dir %{_libdir}/%{name}/%{version}/modules/transports
-%attr(755,root,root) %{_libdir}/%{name}/*/*/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.so*
-%{_libdir}/%{name}/*/*/*.la
-%{_libdir}/%{name}/*/*/*/*.la
+%dir %{_libdir}/%{name}/*/modules
+%dir %{_libdir}/%{name}/*/modules/transports
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/*.so*
+%attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
+%{_libdir}/%{name}/*/modules/*.la
+%{_libdir}/%{name}/*/modules/transports/*.la
 %{_datadir}/libgnomeprint
+# for now it's the only package that uses /etc/gnome
+%dir %{_sysconfdir}/gnome
 %{_sysconfdir}/gnome/libgnomeprint-*
 
 %files devel
@@ -141,5 +144,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
-%{_libdir}/%{name}/*/*/*.a
-%{_libdir}/%{name}/*/*/*/*.a
