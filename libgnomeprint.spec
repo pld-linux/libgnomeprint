@@ -1,21 +1,24 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.5.2
+Version:	2.5.3
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	b836d210b733414a425601938a70d6e2
+# Source0-md5:	0ba9f3c5f493e85250991007f1e287bd
+Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
-#BuildRequires:	autoconf
-#BuildRequires:	automake
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	cups-devel >= 1.1.20
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 2.3.0
+BuildRequires:	gnome-common >= 2.4.0
+BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libbonobo-devel >= 2.5.0
-#BuildRequires:	libtool
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
 BuildRequires:	pango-devel >= 1.3.0
 BuildRequires:	rpm-build >= 4.1-10
@@ -43,7 +46,7 @@ niezbêdne aplikacjom GNOME do drukowania.
 Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 2.3.0
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
@@ -70,7 +73,7 @@ biblioteki drukowania GNOME.
 Summary:	Static libgnomeprint library
 Summary(pl):	Statyczna biblioteka libgnomeprint
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of libgnomeprint library.
@@ -82,7 +85,7 @@ Statyczna wersja biblioteki libgnomeprint.
 Summary:	CUPS module for libgnomeprint
 Summary(pl):	Modu³ CUPS dla libgnomeprint
 Group:		Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description cups
 CUPS module for libgnomeprint.
@@ -92,12 +95,15 @@ Modu³ CUPS dla libgnomeprint.
 
 %prep
 %setup -q
+%patch0 -p1
+
+mv po/{no,nb}.po
 
 %build
-#%%{__libtoolize}
-#%%{__aclocal}
-#%%{__autoconf}
-#%%{__automake}
+%{__libtoolize}
+%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__autoconf}
+%{__automake}
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
