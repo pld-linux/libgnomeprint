@@ -11,14 +11,14 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.3/%{name}-%{version}.tar.bz2
 # Source0-md5:	5a755924f0bb2dd0a846a6d02acab058
 URL:		http://www.gnome.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
+#BuildRequires:	autoconf
+#BuildRequires:	automake
 BuildRequires:	cups-devel
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libbonobo-devel >= 2.3.6
-BuildRequires:	libtool
+#BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.7
 BuildRequires:	pango-devel >= 1.2.0
 BuildRequires:	rpm-build >= 4.1-10
@@ -49,9 +49,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	glib2-devel >= 2.0.1
 Requires:	gtk-doc-common
-Requires:	libxml2-devel >= 2.4.7
 Requires:	libart_lgpl-devel
 Requires:	libbonobo-devel >= 1.110
+Requires:	libxml2-devel >= 2.4.7
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
