@@ -3,11 +3,11 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	1.116.0
+Version:	1.116.1
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	ftp://ftp.gnome.org/pub/gnome/2.0.1/releases/final/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/2.0.2/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-am16.patch
 URL:		http://www.gnome.org/
@@ -87,14 +87,14 @@ Statyczna wersja biblioteki libgnomeprint.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 
 %build
-%{__libtoolize}
-aclocal
-%{__autoconf}
-%{__automake}
+#%{__libtoolize}
+#%{__aclocal}
+#%{__autoconf}
+#%{__automake}
 %configure \
 	--disable-font-install \
 	--with-html-dir=%{_gtkdocdir} \
