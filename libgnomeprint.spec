@@ -34,7 +34,7 @@ BuildRequires:	freetype >= %{freetype_version}
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%description 
+%description
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
 applications and desktop tools to be used in conjunction with a window
 manager for the X Window System. The gnome-print package contains
@@ -117,9 +117,9 @@ gzip -9nf AUTHORS ChangeLog NEWS README installer/README.*
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post 
+%post
 ## we could pass --dynamic here to install to /etc instead
-## but I think it makes more sense to have this not be a config 
+## but I think it makes more sense to have this not be a config
 ## file, then people make their changes in /etc if they want
 libgnomeprint-2.0-font-install                                          \
        --aliases=%{_datadir}/gnome-print/fonts/adobe-urw.font           \
