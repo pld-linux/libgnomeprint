@@ -3,13 +3,11 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	1.116.1
-Release:	3
+Version:	2.1.1
+Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.116/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-ac_fixes.patch
-Patch1:		%{name}-am16.patch
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.1/%{name}-%{version}.tar.bz2
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -17,7 +15,7 @@ BuildRequires:	bonobo-activation-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.3
 BuildRequires:	libart_lgpl-devel >= 2.3.7
-BuildRequires:	libbonobo-devel >= 2.0.0
+BuildRequires:	libbonobo-devel >= 2.1.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.22
 BuildRequires:	pango-devel >= 1.0.0
@@ -88,8 +86,6 @@ Statyczna wersja biblioteki libgnomeprint.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1
 
 %build
 #%{__libtoolize}
@@ -135,10 +131,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README installer/README.*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%dir %{_libdir}/gnome-print-*
-%dir %{_libdir}/gnome-print-*/*
-%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.so*
-%attr(755,root,root) %{_libdir}/gnome-print-*/*/*.la
+%dir %{_libdir}/%{name}/*
+%dir %{_libdir}/%{name}/*/*
+%attr(755,root,root) %{_libdir}/%{name}/*/*/*.so*
+%attr(755,root,root) %{_libdir}/%{name}/*/*/*.la
+%attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.so*
+%attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.la
 %{_datadir}/gnome-print-*
 %{_datadir}/gnome/libgnomeprint-*
 %{_sysconfdir}/gnome/libgnomeprint-*
@@ -154,4 +152,5 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
-%{_libdir}/gnome-print-*/*/*.a
+%{_libdir}/%{name}/*/*/*.a
+%{_libdir}/%{name}/*/*/*/*.a
