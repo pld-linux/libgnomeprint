@@ -3,7 +3,7 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.1.2
+Version:	2.1.3
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -110,22 +110,12 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-## we could pass --dynamic here to install to /etc instead
-## but I think it makes more sense to have this not be a config
-## file, then people make their changes in /etc if they want
-%{_bindir}/libgnomeprint-2.0-font-install \
-       --aliases=%{_datadir}/libgnomeprint-2.0/fonts/adobe-urw.font \
-       --recursive --static \
-       %{_fontsdir}
-/sbin/ldconfig
-
+%post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files -f %{name}-2.2.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-#%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_libdir}/%{name}/*
 %dir %{_libdir}/%{name}/*/*
@@ -133,8 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/*/*/*.la
 %attr(755,root,root) %{_libdir}/%{name}/*/*/*/*.so*
 %{_libdir}/%{name}/*/*/*/*.la
-%{_datadir}/gnome-print-*
-#%{_datadir}/gnome/libgnomeprint-*
+%{_datadir}/libgnomeprint/*
 %{_sysconfdir}/gnome/libgnomeprint-*
 
 %files devel
