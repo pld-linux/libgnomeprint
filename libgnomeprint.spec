@@ -49,11 +49,11 @@ Summary:	Include files for libgnomeprint
 Summary(pl):	Pliki nag³ówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.4.4
+Requires:	glib2-devel >= 1:2.6.3
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
-Requires:	libxml2-devel >= 2.5.7
-Requires:	pango-devel >= 1:1.5.2
+Requires:	libxml2-devel >= 2.6.17
+Requires:	pango-devel >= 1:1.8.0
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
