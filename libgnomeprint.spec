@@ -1,12 +1,12 @@
 Summary:	Printing library for GNOME
 Summary(pl):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.10.0
+Version:	2.10.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	a8cd7e55c5ee9da019b2257eff83ce35
+# Source0-md5:	0605d3f8335c1637dd47699507dacd1d
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -18,13 +18,13 @@ BuildRequires:	gtk-doc >= 0.9
 BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libgnomecups-devel >= 0.2.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.6.17
-BuildRequires:	pango-devel >= 1:1.8.0
+BuildRequires:	libxml2-devel >= 2.6.18
+BuildRequires:	pango-devel >= 1:1.8.1
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpm-build >= 4.1-10
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1:1.8.0
+Requires:	pango >= 1:1.8.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,8 +52,8 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.6.3
 Requires:	gtk-doc-common
 Requires:	libart_lgpl-devel >= 2.3.14
-Requires:	libxml2-devel >= 2.6.17
-Requires:	pango-devel >= 1:1.8.0
+Requires:	libxml2-devel >= 2.6.18
+Requires:	pango-devel >= 1:1.8.1
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
