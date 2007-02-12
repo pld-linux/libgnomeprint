@@ -1,5 +1,5 @@
 Summary:	Printing library for GNOME
-Summary(pl):	Biblioteka drukowania dla GNOME
+Summary(pl.UTF-8):   Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.12.1
 Release:	7
@@ -38,15 +38,15 @@ the GNOME applications that can print. If you would like to develop
 GNOME applications that can print you will also need to install the
 gnome-print devel package.
 
-%description -l pl
+%description -l pl.UTF-8
 GNOME (GNU Network Object Model Environment) jest zestawem przyjaznych
-dla uøytkownika aplikacji i narzÍdzi do uøytku w po≥±czeniu z zarz±dc±
+dla u≈ºytkownika aplikacji i narzƒôdzi do u≈ºytku w po≈ÇƒÖczeniu z zarzƒÖdcƒÖ
 okien X Window System. Pakiet libgnomeprint zawiera biblioteki
-niezbÍdne aplikacjom GNOME do drukowania.
+niezbƒôdne aplikacjom GNOME do drukowania.
 
 %package devel
 Summary:	Include files for libgnomeprint
-Summary(pl):	Pliki nag≥Ûwkowe libgnomeprint
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.12.0
@@ -67,33 +67,33 @@ develop GNOME applications that will use the GNOME print capabilities.
 You do not need to install the gnome-print-devel package if you just
 want to use the GNOME desktop environment.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe niezbÍdne do kompilacji aplikacji uøywaj±cych
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe niezbƒôdne do kompilacji aplikacji u≈ºywajƒÖcych
 biblioteki drukowania GNOME.
 
 %package static
 Summary:	Static libgnomeprint library
-Summary(pl):	Statyczna biblioteka libgnomeprint
+Summary(pl.UTF-8):   Statyczna biblioteka libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of libgnomeprint library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki libgnomeprint.
 
 %package cups
 Summary:	CUPS module for libgnomeprint
-Summary(pl):	Modu≥ CUPS dla libgnomeprint
+Summary(pl.UTF-8):   Modu≈Ç CUPS dla libgnomeprint
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description cups
 CUPS module for libgnomeprint.
 
-%description static -l pl
-Modu≥ CUPS dla libgnomeprint.
+%description static -l pl.UTF-8
+Modu≈Ç CUPS dla libgnomeprint.
 
 %prep
 %setup -q
