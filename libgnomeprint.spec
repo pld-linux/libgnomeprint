@@ -1,5 +1,5 @@
 Summary:	Printing library for GNOME
-Summary(pl.UTF-8):   Biblioteka drukowania dla GNOME
+Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.12.1
 Release:	7
@@ -46,7 +46,7 @@ niezbędne aplikacjom GNOME do drukowania.
 
 %package devel
 Summary:	Include files for libgnomeprint
-Summary(pl.UTF-8):   Pliki nagłówkowe libgnomeprint
+Summary(pl.UTF-8):	Pliki nagłówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.12.0
@@ -73,7 +73,7 @@ biblioteki drukowania GNOME.
 
 %package static
 Summary:	Static libgnomeprint library
-Summary(pl.UTF-8):   Statyczna biblioteka libgnomeprint
+Summary(pl.UTF-8):	Statyczna biblioteka libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -85,7 +85,7 @@ Statyczna wersja biblioteki libgnomeprint.
 
 %package cups
 Summary:	CUPS module for libgnomeprint
-Summary(pl.UTF-8):   Moduł CUPS dla libgnomeprint
+Summary(pl.UTF-8):	Moduł CUPS dla libgnomeprint
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
