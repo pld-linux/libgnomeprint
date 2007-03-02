@@ -1,30 +1,34 @@
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.12.1
-Release:	7
+Version:	2.17.92
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.12/%{name}-%{version}.tar.bz2
-# Source0-md5:	ea729d4968fe2169c84efb12ace5f6cc
+Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.17/%{name}-%{version}.tar.bz2
+# Source0-md5:	3c76fc0fb7a99b591bf05cbbf0b2726f
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
+BuildRequires:	bison
 BuildRequires:	cups-devel >= 1:1.1.20
+BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 1:2.12.0
-BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gtk-doc >= 1.6
-BuildRequires:	libart_lgpl-devel >= 2.3.17
+BuildRequires:	glib2-devel >= 1:2.12.9
+BuildRequires:	gnome-common >= 2.12.0
+BuildRequires:	gtk-doc >= 1.8
+BuildRequires:	intltool >= 0.35.5
+BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libgnomecups-devel >= 0.2.2
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.26
-BuildRequires:	pango-devel >= 1:1.13.3
+BuildRequires:	libxml2-devel >= 1:2.6.27
+BuildRequires:	pango-devel >= 1:1.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	zlib-devel
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1:1.13.3
+Requires:	pango >= 1:1.16.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,11 +53,11 @@ Summary:	Include files for libgnomeprint
 Summary(pl.UTF-8):	Pliki nagłówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.12.0
+Requires:	glib2-devel >= 1:2.12.9
 Requires:	gtk-doc-common
-Requires:	libart_lgpl-devel >= 2.3.17
-Requires:	libxml2-devel >= 1:2.6.26
-Requires:	pango-devel >= 1:1.13.3
+Requires:	libart_lgpl-devel >= 2.3.19
+Requires:	libxml2-devel >= 1:2.6.27
+Requires:	pango-devel >= 1:1.16.0
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -82,6 +86,18 @@ Static version of libgnomeprint library.
 
 %description static -l pl.UTF-8
 Statyczna wersja biblioteki libgnomeprint.
+
+%package apidocs
+Summary:	libgnomeprint API documentation
+Summary(pl.UTF-8):	Dokumentacja API libgnomeprint
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+libgnomeprint API documentation.
+
+%description apidocs
+Dokumentacja API libgnomeprint.
 
 %package cups
 Summary:	CUPS module for libgnomeprint
@@ -122,8 +138,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 # no static modules and *.la files - shut up check-files
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*/modules/{*.{a,la},transports/*.{a,la},filters/*.{a,la}}
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
-
 %find_lang %{name}-2.2
 
 %clean
@@ -149,13 +163,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/gnome
 %{_sysconfdir}/gnome/libgnomeprint-*
 
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/libgnomeprint
+
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
-%{_gtkdocdir}/*
 
 %files static
 %defattr(644,root,root,755)
