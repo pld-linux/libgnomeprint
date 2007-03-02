@@ -96,7 +96,7 @@ Requires:	gtk-doc-common
 %description apidocs
 libgnomeprint API documentation.
 
-%description apidocs
+%description apidocs -l pl.UTF-8
 Dokumentacja API libgnomeprint.
 
 %package cups
@@ -108,7 +108,7 @@ Requires:	%{name} = %{version}-%{release}
 %description cups
 CUPS module for libgnomeprint.
 
-%description static -l pl.UTF-8
+%description cups -l pl.UTF-8
 Moduł CUPS dla libgnomeprint.
 
 %prep
