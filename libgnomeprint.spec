@@ -1,12 +1,12 @@
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.18.0
+Version:	2.18.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	5bfc42d67cae1148d1faf238185cbf4d
+# Source0-md5:	be87a17490c4976a85488537f22bcfde
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
