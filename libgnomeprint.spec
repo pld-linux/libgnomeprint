@@ -1,12 +1,12 @@
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.18.1
+Version:	2.18.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	be87a17490c4976a85488537f22bcfde
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
+# Source0-md5:	b1f6c95a8dbb8ce17ab00fc2eea2aa91
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -14,21 +14,21 @@ BuildRequires:	bison
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	glib2-devel >= 1:2.12.11
-BuildRequires:	gnome-common >= 2.12.0
+BuildRequires:	glib2-devel >= 1:2.14.1
+BuildRequires:	gnome-common >= 2.18.0
 BuildRequires:	gtk-doc >= 1.8
-BuildRequires:	intltool >= 0.35.5
+BuildRequires:	intltool >= 0.36.2
 BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libgnomecups-devel >= 0.2.2
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.27
-BuildRequires:	pango-devel >= 1:1.16.1
+BuildRequires:	libxml2-devel >= 1:2.6.30
+BuildRequires:	pango-devel >= 1:1.18.1
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	zlib-devel
 Requires:	ghostscript-fonts-std
-Requires:	pango >= 1:1.16.1
+Requires:	pango >= 1:1.18.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,10 +53,10 @@ Summary:	Include files for libgnomeprint
 Summary(pl.UTF-8):	Pliki nagłówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.12.11
+Requires:	glib2-devel >= 1:2.14.0
 Requires:	libart_lgpl-devel >= 2.3.19
-Requires:	libxml2-devel >= 1:2.6.27
-Requires:	pango-devel >= 1:1.16.1
+Requires:	libxml2-devel >= 1:2.6.30
+Requires:	pango-devel >= 1:1.18.1
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
