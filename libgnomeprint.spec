@@ -27,7 +27,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	zlib-devel
-Requires:	ghostscript-fonts-std
+Requires:	fonts-Type1-urw
 Requires:	pango >= 1:1.18.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
