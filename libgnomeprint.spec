@@ -1,12 +1,12 @@
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.18.2
+Version:	2.18.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	b1f6c95a8dbb8ce17ab00fc2eea2aa91
+# Source0-md5:	bc460f875425a956176f07440b3fa46e
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -14,21 +14,25 @@ BuildRequires:	bison
 BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
+BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.14.1
-BuildRequires:	gnome-common >= 2.18.0
+BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gtk-doc >= 1.8
 BuildRequires:	intltool >= 0.36.2
 BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libgnomecups-devel >= 0.2.2
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.30
-BuildRequires:	pango-devel >= 1:1.18.1
+BuildRequires:	pango-devel >= 1:1.18.3
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	fonts-Type1-urw
-Requires:	pango >= 1:1.18.1
+Requires:	pango >= 1:1.18.3
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,10 +57,10 @@ Summary:	Include files for libgnomeprint
 Summary(pl.UTF-8):	Pliki nagłówkowe libgnomeprint
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.14.0
+Requires:	glib2-devel >= 1:2.14.1
 Requires:	libart_lgpl-devel >= 2.3.19
 Requires:	libxml2-devel >= 1:2.6.30
-Requires:	pango-devel >= 1:1.18.1
+Requires:	pango-devel >= 1:1.18.3
 
 %description devel
 GNOME (GNU Network Object Model Environment) is a user-friendly set of
@@ -113,10 +117,15 @@ Moduł CUPS dla libgnomeprint.
 %prep
 %setup -q
 
+sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
+mv po/sr@{Latn,latin}.po
+
 %build
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--disable-font-install \
@@ -148,15 +157,27 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}-2.2.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libgnomeprint-2-2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgnomeprint-2-2.so.0
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/*
-%dir %{_libdir}/%{name}/*/modules
-%dir %{_libdir}/%{name}/*/modules/filters
-%dir %{_libdir}/%{name}/*/modules/transports
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/filters/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintlpd.so
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/transports/*.so*
+%dir %{_libdir}/%{name}/%{version}
+%dir %{_libdir}/%{name}/%{version}/modules
+%dir %{_libdir}/%{name}/%{version}/modules/filters
+%dir %{_libdir}/%{name}/%{version}/modules/transports
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-clip.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-draft.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-frgba.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-multipage.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-position.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-reorder.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-reverse.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-rotate.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-select.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/filters/libgnomeprint-zoom.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/transports/libgnomeprint-custom.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/transports/libgnomeprint-file.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/transports/libgnomeprint-lpr.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/libgnomeprintlpd.so
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
 %dir %{_sysconfdir}/gnome
@@ -168,15 +189,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*
-%{_pkgconfigdir}/*.pc
+%attr(755,root,root) %{_libdir}/libgnomeprint-2-2.so
+%{_libdir}/libgnomeprint-2-2.la
+%{_includedir}/libgnomeprint-2.2
+%{_pkgconfigdir}/libgnomeprint-2.2.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/libgnomeprint-2-2.a
 
 %files cups
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/*/modules/libgnomeprintcups.so
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/libgnomeprintcups.so
