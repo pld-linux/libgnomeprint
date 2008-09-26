@@ -1,12 +1,12 @@
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
-Version:	2.18.4
+Version:	2.18.5
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	bc460f875425a956176f07440b3fa46e
+# Source0-md5:	c325baf4487335259e050619185787b1
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -27,7 +27,6 @@ BuildRequires:	pango-devel >= 1:1.18.3
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
-BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	fonts-Type1-urw
 Requires:	pango >= 1:1.18.3
@@ -116,9 +115,6 @@ Moduł CUPS dla libgnomeprint.
 
 %prep
 %setup -q
-
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
 
 %build
 %{__intltoolize}
