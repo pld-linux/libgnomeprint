@@ -12,6 +12,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	bison
 BuildRequires:	cups-devel >= 1:1.1.20
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	gettext-devel
