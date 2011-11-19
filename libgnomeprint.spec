@@ -1,12 +1,18 @@
+#
+# Conditional build:
+%bcond_without	papi	# PAPI printing support
+#
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.18.8
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
 # Source0-md5:	63b05ffb5386e131487c6af30f4c56ac
+Patch0:		%{name}-includes.patch
+Patch1:		%{name}-papi.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -25,11 +31,15 @@ BuildRequires:	libgnomecups-devel >= 0.2.2
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	pango-devel >= 1:1.18.3
+%{?with_papi:BuildRequires:	papi-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	zlib-devel
 Requires:	fonts-Type1-urw
+Requires:	glib2 >= 1:2.14.1
+Requires:	libart_lgpl >= 2.3.19
+Requires:	libxml2 >= 1:2.6.30
 Requires:	pango >= 1:1.18.3
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -107,6 +117,8 @@ Summary:	CUPS module for libgnomeprint
 Summary(pl.UTF-8):	Moduł CUPS dla libgnomeprint
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	cups >= 1:1.1.20
+Requires:	libgnomecups >= 0.2.2
 
 %description cups
 CUPS module for libgnomeprint.
@@ -114,13 +126,27 @@ CUPS module for libgnomeprint.
 %description cups -l pl.UTF-8
 Moduł CUPS dla libgnomeprint.
 
+%package papi
+Summary:	PAPI module for libgnomeprint
+Summary(pl.UTF-8):	Moduł PAPI dla libgnomeprint
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	libgnomecups >= 0.2.2
+Requires:	papi
+
+%description papi
+PAPI module for libgnomeprint.
+
+%description papi -l pl.UTF-8
+Moduł PAPI dla libgnomeprint.
+
 %prep
 %setup -q
-
-%{__sed} -i -e 's/^en@shaw//' po/LINGUAS
-rm -f po/en@shaw.po
+%patch0 -p1
+%patch1 -p1
 
 %build
+CPPFLAGS="%{rpmcppflags}%{?with_papi: -I/usr/include/papi}"
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
@@ -129,9 +155,10 @@ rm -f po/en@shaw.po
 %{__automake}
 %configure \
 	--disable-font-install \
-	--with-html-dir=%{_gtkdocdir} \
 	--enable-gtk-doc \
-	--with-cups
+	--with-cups \
+	--with-html-dir=%{_gtkdocdir} \
+	%{!?with_papi:--without-papi}
 %{__make}
 
 %install
@@ -144,7 +171,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 	HTML_DIR=%{_gtkdocdir}
 
 # no static modules and *.la files - shut up check-files
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*/modules/{*.{a,la},transports/*.{a,la},filters/*.{a,la}}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/*/modules/{*.{a,la},transports/*.{a,la},filters/*.{a,la}}
 
 %find_lang %{name}-2.2
 
@@ -181,7 +208,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/libgnomeprint
 # for now it's the only package that uses /etc/gnome
 %dir %{_sysconfdir}/gnome
-%{_sysconfdir}/gnome/libgnomeprint-*
+%dir %{_sysconfdir}/gnome/libgnomeprint-2.0
+%dir %{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 
 %files apidocs
 %defattr(644,root,root,755)
@@ -201,3 +229,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cups
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/libgnomeprintcups.so
+
+%files papi
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/%{version}/modules/libgnomeprintpapi.so

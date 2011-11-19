@@ -1,0 +1,10 @@
+--- libgnomeprint-2.18.8/libgnomeprint/modules/cups/gnome-print-cups-transport.c.orig	2010-02-09 13:32:51.000000000 +0100
++++ libgnomeprint-2.18.8/libgnomeprint/modules/cups/gnome-print-cups-transport.c	2011-11-19 13:04:12.848401082 +0100
+@@ -34,6 +34,7 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
++#include <stdio.h>
+ #include <unistd.h>
+ #include <locale.h>
+ 

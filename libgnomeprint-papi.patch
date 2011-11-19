@@ -1,0 +1,9 @@
+--- libgnomeprint-2.18.8/libgnomeprint/modules/papi/Makefile.am.orig	2010-02-09 13:32:51.000000000 +0100
++++ libgnomeprint-2.18.8/libgnomeprint/modules/papi/Makefile.am	2011-11-19 13:17:09.308427081 +0100
+@@ -9,5 +9,5 @@
+ plugin_LTLIBRARIES = libgnomeprintpapi.la
+ 
+ libgnomeprintpapi_la_SOURCES = gnome-print-papi.c gnome-print-papi-transport.c
+-libgnomeprintpapi_la_LDFLAGS = $(PAPI_LIBS) $(Z_LIBS)
++libgnomeprintpapi_la_LDFLAGS = $(PAPI_LIBS) $(Z_LIBS) -avoid-version -module -no-undefined
+ libgnomeprintpapi_la_LIBADD  = ../../libgnomeprint-2-2.la
