@@ -13,6 +13,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{ver
 # Source0-md5:	63b05ffb5386e131487c6af30f4c56ac
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-papi.patch
+Patch2:		bison3.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
@@ -144,6 +145,7 @@ Moduł PAPI dla libgnomeprint.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 CPPFLAGS="%{rpmcppflags}%{?with_papi: -I/usr/include/papi}"
