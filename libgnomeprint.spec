@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	papi	# PAPI printing support
-#
+
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.18.8
-Release:	5
+Release:	6
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
@@ -106,6 +106,9 @@ Summary:	libgnomeprint API documentation
 Summary(pl.UTF-8):	Dokumentacja API libgnomeprint
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 libgnomeprint API documentation.
