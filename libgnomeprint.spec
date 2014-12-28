@@ -22,7 +22,7 @@ BuildRequires:	cups-devel >= 1:1.1.20
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.14.1
 BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gtk-doc >= 1.8
