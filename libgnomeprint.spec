@@ -1,12 +1,13 @@
 #
 # Conditional build:
+%bcond_with	apidocs	# enable gtk-doc
 %bcond_without	papi	# PAPI printing support
 
 Summary:	Printing library for GNOME
 Summary(pl.UTF-8):	Biblioteka drukowania dla GNOME
 Name:		libgnomeprint
 Version:	2.18.8
-Release:	7
+Release:	8
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomeprint/2.18/%{name}-%{version}.tar.bz2
@@ -19,13 +20,13 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	bison
 BuildRequires:	cups-devel >= 1:1.1.20
-BuildRequires:	docbook-dtd412-xml
+%{?with_apidocs:BuildRequires:	docbook-dtd412-xml}
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1.3
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.14.1
 BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gtk-doc >= 1.8
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.8}
 BuildRequires:	intltool >= 0.36.2
 BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libgnomecups-devel >= 0.2.2
@@ -160,7 +161,7 @@ CPPFLAGS="%{rpmcppflags}%{?with_papi: -I/usr/include/papi}"
 %{__automake}
 %configure \
 	--disable-font-install \
-	--enable-gtk-doc \
+	--enable-gtk-doc%{!?with_apidocs:=no} \
 	--with-cups \
 	--with-html-dir=%{_gtkdocdir} \
 	%{!?with_papi:--without-papi}
@@ -216,9 +217,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/gnome/libgnomeprint-2.0
 %dir %{_sysconfdir}/gnome/libgnomeprint-2.0/fonts
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libgnomeprint
+%endif
 
 %files devel
 %defattr(644,root,root,755)
