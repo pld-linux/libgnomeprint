@@ -1,0 +1,21 @@
+--- libgnomeprint-2.18.8/gtk-doc.make.orig	2010-02-09 13:32:51.000000000 +0100
++++ libgnomeprint-2.18.8/gtk-doc.make	2021-06-22 21:37:46.025365558 +0200
+@@ -67,9 +67,6 @@
+ #### templates ####
+ 
+ tmpl-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt
+-	@echo '*** Rebuilding template files ***'
+-	@-chmod -R u+w $(srcdir)
+-	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE)
+ 	touch tmpl-build.stamp
+ 
+ tmpl.stamp: tmpl-build.stamp
+@@ -97,7 +94,7 @@
+ 	cd $(srcdir)/html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
+ 	test "x$(HTML_IMAGES)" = "x" || ( cd $(srcdir) && cp $(HTML_IMAGES) html )
+ 	@echo '-- Fixing Crossreferences' 
+-	cd $(srcdir) && gtkdoc-fixxref --module-dir=html --html-dir=$(HTML_DIR) $(FIXXREF_OPTIONS)
++	cd $(srcdir) && gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html --html-dir=$(HTML_DIR) $(FIXXREF_OPTIONS)
+ 	touch html-build.stamp
+ endif
+ 
