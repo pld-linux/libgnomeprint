@@ -145,10 +145,10 @@ Dokumentacja API libgnomeprint.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
 
 for f in libgnomeprint/transports/gp-transport-custom.h \
 	libgnomeprint/ttsubset/{crc32.c,crc32.h,sft.c,list.c,list.h,sft.c,sft.h,ttcr.c,ttcr.h} ; do
